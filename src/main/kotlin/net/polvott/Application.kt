@@ -1,34 +1,39 @@
 package net.polvott
-import io.ktor.serialization.kotlinx.*
-import io.ktor.serialization.kotlinx.json.*
+
+import io.ktor.serialization.kotlinx.* // ktlint-disable no-wildcard-imports
+import io.ktor.serialization.kotlinx.json.* // ktlint-disable no-wildcard-imports
+import io.ktor.server.application.* // ktlint-disable no-wildcard-imports
+import io.ktor.server.engine.* // ktlint-disable no-wildcard-imports
+import io.ktor.server.netty.* // ktlint-disable no-wildcard-imports
+import io.ktor.server.plugins.callloging.* // ktlint-disable no-wildcard-imports
+import io.ktor.server.plugins.contentnegotiation.* // ktlint-disable no-wildcard-imports
+import io.ktor.server.plugins.defaultheaders.* // ktlint-disable no-wildcard-imports
+import io.ktor.server.routing.* // ktlint-disable no-wildcard-imports
 import kotlinx.serialization.json.Json
-import io.ktor.server.application.*
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
-import io.ktor.server.plugins.callloging.*
-import io.ktor.server.plugins.defaultheaders.*
-import io.ktor.server.plugins.contentnegotiation.*
-import io.ktor.server.routing.*
-import net.polvott.plugins.*
-import net.polvott.web.SampleRouter
-import web.*
+import net.polvott.database.Database
+// import net.polvott.plugins.* // ktlint-disable no-wildcard-imports
+import net.polvott.web.sampleRouter
+import web.* // ktlint-disable no-wildcard-imports
 
 fun Application.module() {
     install(CallLogging)
     install(DefaultHeaders)
 
-    install(ContentNegotiation){
-        json(Json {
-            prettyPrint = true
-            isLenient = true
-        })
+    install(ContentNegotiation) {
+        json(
+            Json {
+                prettyPrint = true
+                isLenient = true
+            }
+        )
     }
+
+    val datab = Database()
 
     install(Routing) {
         setupStatics()
-        SampleRouter()
+        sampleRouter(datab)
     }
-    // configureRouting()
 }
 
 fun main(args: Array<String>) {
