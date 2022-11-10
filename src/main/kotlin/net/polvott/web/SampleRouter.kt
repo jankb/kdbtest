@@ -15,17 +15,21 @@ import io.ktor.server.routing.route
 
 fun Route.SampleRouter()
 {
-    route("/sample")
+    route("/samples")
     {
         get("/{id}")
         {
             call.respondText("This is some sample data for sample ${call.parameters["id"]}", ContentType.Text.Html)
         }
 
-        post("/create") {
+        post {
             val data = call.receive<Sample>()
             println(data)
             call.respond(HttpStatusCode.Created, "Created sample for ID ${data.id}")
+        }
+
+        get {
+            call.respondText("All Data", ContentType.Text.Plain)
         }
     }
 }
