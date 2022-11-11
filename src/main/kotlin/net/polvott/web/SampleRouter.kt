@@ -15,9 +15,7 @@ import io.ktor.server.routing.route
 import net.polvott.dto.Samples
 
 
-
-fun Route.sampleRouter(db: net.polvott.database.Database)
-{
+fun Route.sampleRouter(db: net.polvott.database.Database) {
     route("/samples")
     {
         get("/{id}")
@@ -32,21 +30,12 @@ fun Route.sampleRouter(db: net.polvott.database.Database)
         }
 
         post {
-/*
-            Database.connect("jdbc:h2:mem:test", driver = "org.h2.driver")
 
-            transaction {
-                addLogger(StdOutSqlLogger)
-                SchemaUtils.create(Samples)
-
-                val result = Samples.insert { it[name] = "MRSA" } get Samples.id
-                println("### JKB ### Created sample with id $result")
-
-                println("### JKB ### Samples: ${Samples.selectAll()}")
-            }
-*/
             val data = call.receive<Sample>()
             println(data)
+
+            db.insert(data.name)
+
             call.respond(HttpStatusCode.Created, "Created sample for ID ${data.id}")
         }
 

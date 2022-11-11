@@ -43,4 +43,12 @@ class Database
             println("### JKB ### Samples: ${Samples.selectAll()}")
         }
     }
+
+    public fun insert(name: String)
+    {
+        transaction {
+            addLogger(StdOutSqlLogger)
+            Samples.insert { it[Samples.name] = name }
+        }
+    }
 }
