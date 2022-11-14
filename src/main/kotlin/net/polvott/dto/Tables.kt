@@ -1,15 +1,20 @@
 package net.polvott.dto
 
 import kotlinx.serialization.Serializable
-import org.jetbrains.exposed.dao.id.IntIdTable
+import org.jetbrains.exposed.dao.id.*
+import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.Table.Dual.varchar
+import org.jetbrains.exposed.sql.Table.*
 
-object Samples: IntIdTable()
+
+object Samples: Table()
 {
-    val name = varchar("name", 50)
+    val sample_id = integer("sample_id")
+    val description = varchar("description", 255)
 }
 
 @Serializable
 data class Sample(
-    val id: Int,
-    val name: String
+    val sample_id: Int,
+    val description: String
 )

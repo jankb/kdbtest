@@ -1,6 +1,6 @@
 
-CREATE TABLE sample(
-  sample_id BIGSERIAL PRIMARY KEY,
-  description VARCHAR(255),
-  pos geometry
+CREATE TABLE SAMPLES(
+  sample_id BIGSERIAL NOT NULL PRIMARY KEY,
+  description VARCHAR(255) /*,
+ pos geometry*/
 );

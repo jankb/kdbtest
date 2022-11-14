@@ -34,9 +34,9 @@ fun Route.sampleRouter(db: net.polvott.database.Database) {
             val data = call.receive<Sample>()
             println(data)
 
-            db.insert(data.name)
+            db.insert(data.description)
 
-            call.respond(HttpStatusCode.Created, "Created sample for ID ${data.id}")
+            call.respond(HttpStatusCode.Created, "Created sample for ID ${data.sample_id}")
         }
 
         get {
