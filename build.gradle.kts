@@ -3,19 +3,21 @@ val kotlin_version: String by project
 val logback_version: String by project
 val exposedVersion: String by project
 val h2Version: String by project
+val flyway_version: String by project
+
 
 plugins {
     application
     kotlin("jvm") version "1.7.20"
     kotlin("plugin.serialization") version "1.7.20"
     id("io.ktor.plugin") version "2.1.2"
+    id("org.flywaydb.flyway") version "9.8.1"
 }
 
 group = "net.polvott"
 version = "0.0.1"
 application {
     mainClass.set("net.polvott.ApplicationKt")
-
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }
@@ -36,7 +38,7 @@ dependencies {
 
     implementation("com.h2database:h2:$h2Version")
 
-    implementation("org.flywaydb:flyway-core:9.8.1")
+    implementation("org.flywaydb:flyway-core:$flyway_version")
 
     implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")

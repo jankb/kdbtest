@@ -12,6 +12,8 @@ import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 
+import org.flywaydb.core.*
+
 class Database
 {
     init {
@@ -19,6 +21,9 @@ class Database
 
         Database.connect("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1", driver = "org.h2.Driver")
 
+
+        val flyway = Flyway.configure().dataSource("jdbc:h2:mem:test", "", "").load()
+        flyway.migrate()
 
         transaction {
             addLogger(StdOutSqlLogger)
