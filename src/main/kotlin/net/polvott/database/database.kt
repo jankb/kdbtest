@@ -14,6 +14,8 @@ import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 
+import io.ktor.server.config.ApplicationConfig
+
 import org.flywaydb.core.*
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 
@@ -21,6 +23,8 @@ class Database {
     init {
         println("### JKB ### database::init")
 
+        val dbUrl = ApplicationConfig(null).propertyOrNull("ktor.db.url")
+        println("### JKB ### database::init, dbUrl is ${dbUrl?.getString()}")
         Database.connect("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1", driver = "org.h2.Driver")
 
 
