@@ -1,11 +1,7 @@
 package net.polvott.dto
 
 import kotlinx.serialization.Serializable
-import org.jetbrains.exposed.dao.id.*
 import org.jetbrains.exposed.sql.Table
-import org.jetbrains.exposed.sql.Table.Dual.varchar
-import org.jetbrains.exposed.sql.Table.*
-
 
 object Samples: Table()
 {

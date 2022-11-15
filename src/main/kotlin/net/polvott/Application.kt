@@ -10,10 +10,10 @@ import io.ktor.server.plugins.contentnegotiation.* // ktlint-disable no-wildcard
 import io.ktor.server.plugins.defaultheaders.* // ktlint-disable no-wildcard-imports
 import io.ktor.server.routing.* // ktlint-disable no-wildcard-imports
 import kotlinx.serialization.json.Json
-import net.polvott.database.Database
-// import net.polvott.plugins.* // ktlint-disable no-wildcard-imports
+
+import net.polvott.database.DatabaseFactory
 import net.polvott.web.sampleRouter
-import web.* // ktlint-disable no-wildcard-imports
+import web.setupStatics
 
 fun Application.module() {
     install(CallLogging)
@@ -28,11 +28,11 @@ fun Application.module() {
         )
     }
 
-    val datab = Database()
+    DatabaseFactory.init()
 
     install(Routing) {
         setupStatics()
-        sampleRouter(datab)
+        sampleRouter()
     }
 }
 
