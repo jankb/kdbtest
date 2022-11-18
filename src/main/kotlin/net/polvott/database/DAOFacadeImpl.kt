@@ -5,6 +5,7 @@ import net.polvott.database.DatabaseFactory.dbQuery
 import net.polvott.dto.Sample
 import net.polvott.dto.Samples
 import org.jetbrains.exposed.sql.ResultRow
+import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 
@@ -17,6 +18,14 @@ class DAOFacadeImpl : DAOFacade {
 
     override suspend fun allSamples(): List<Sample> = dbQuery {
         Samples.selectAll().map(::resultRowFromSample)
+    }
+
+    override suspend fun addNewSample(id: Int, description: String): Sample? = dbQuery{
+        val result = Samples.insert {
+            it[Samples.sample_id] = id
+            it[Samples.description] = description
+        }
+        result.resultedValues?.singleOrNull()?.let(::resultRowFromSample)
     }
 
     override suspend fun sample(id: Int): Sample? = dbQuery {

@@ -27,5 +27,6 @@ object DatabaseFactory
 interface DAOFacade {
     suspend fun allSamples(): List<Sample>
     suspend fun sample(id: Int): Sample?
+    suspend fun addNewSample(id: Int, description: String): Sample?
 }
 
