@@ -40,13 +40,21 @@ dependencies {
 
     implementation("com.h2database:h2:$h2Version")
 
+    implementation("org.postgresql:postgresql:42.5.0")
+    implementation("net.postgis:postgis-geometry:2021.1.0")
+    implementation("net.postgis:postgis-jdbc:2021.1.0")
+
+    // https://mvnrepository.com/artifact/net.postgis/postgis-geometry
+    implementation("net.postgis:postgis-geometry:2021.1.0")
+
+
     implementation("org.flywaydb:flyway-core:$flyway_version")
 
     implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
 
-    implementation("com.h2database:h2:$h2Version")
+    //implementation("com.h2database:h2:$h2Version")
 
     implementation("ch.qos.logback:logback-classic:$logback_version")
 

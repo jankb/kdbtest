@@ -1,0 +1,38 @@
+
+version: '3.9'
+
+services:
+  db:
+    container_name: pgis_container
+    image: postgis/postgis:14-3.3
+    restart: always
+    environment:
+        POSTGRES_USER: prove
+        POSTGRES_PASSWORD: taking
+        POSTGRES_DB: prove
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: taking
+    ports:
+      - "5050:80"
+
+# U/P admin:geoserver
+  geoserver:
+    container_name: geoserver_container
+    image: docker.osgeo.org/geoserver:2.21.1
+    restart: always
+    ports:
+      - "8080:8080"
+
+volumes:
+  pgdata:
+

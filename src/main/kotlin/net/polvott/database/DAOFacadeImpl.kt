@@ -9,18 +9,36 @@ import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 
+
+
+import net.postgis.jdbc.PGgeometry
+import net.postgis.jdbc.geometry.Point
+
+import net.postgis.jdbc.geometry.Geometry
+
 class DAOFacadeImpl : DAOFacade {
 
-    private fun resultRowFromSample(row: ResultRow) = Sample (
-        sample_id = row[Samples.sample_id],
-        description = row[Samples.description]
-    )
+    private fun resultRowFromSample(row: ResultRow): Sample {
+        val blob = row[Samples.pos]
+        val pos = PGgeometry(String(blob.bytes))
+        if (pos.geoType == Geometry.POINT) {
+            val pt = pos.geometry as Point
+            val lon = pt.x
+            val lat = pt.y
+            println("landing point for debugger $pt")
+        }
+        return Sample(
+            sample_id = row[Samples.sample_id],
+            description = row[Samples.description],
+            pos = pos.geometry.typeString
+        )
+    }
 
     override suspend fun allSamples(): List<Sample> = dbQuery {
         Samples.selectAll().map(::resultRowFromSample)
     }
 
-    override suspend fun addNewSample(id: Int, description: String): Sample? = dbQuery{
+    override suspend fun addNewSample(id: Int, description: String, pos : String): Sample? = dbQuery{
         val result = Samples.insert {
             it[Samples.sample_id] = id
             it[Samples.description] = description

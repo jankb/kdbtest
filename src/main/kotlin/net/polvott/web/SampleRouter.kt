@@ -32,36 +32,30 @@ fun Route.sampleRouter() {
 
         post {
 
-try {
-    val sample = call.receive<Sample>()
-    val createdSample = dao.addNewSample(sample.sample_id.toInt(), sample.description)
-    call.respond(HttpStatusCode.Created)
+            try {
+                val sample = call.receive<Sample>()
+                val createdSample = dao.addNewSample(sample.sample_id.toInt(), sample.description, sample.pos)
+                call.respond(HttpStatusCode.Created)
 
-}
-catch(ex : BadRequestException)
-{
-    println("Exception $ex")
-    val c = ex.cause
-    call.respond(HttpStatusCode.BadRequest, "Error: ${c?.cause}" )
-}
-catch(ex : SerializationException)
-{
-    println("Exception $ex")
-    call.respond(HttpStatusCode.BadRequest, "Error: ${ex.cause}" )
-}
-catch (e: Exception)
-{
-    println("Exception $e")
-    call.respond(HttpStatusCode.BadRequest, "Error: ${e.cause}" )
-}
+            } catch (ex: BadRequestException) {
+                println("Exception $ex")
+                val c = ex.cause
+                call.respond(HttpStatusCode.BadRequest, "Error: ${c?.cause}")
+            } catch (ex: SerializationException) {
+                println("Exception $ex")
+                call.respond(HttpStatusCode.BadRequest, "Error: ${ex.cause}")
+            } catch (e: Exception) {
+                println("Exception $e")
+                call.respond(HttpStatusCode.BadRequest, "Error: ${e.cause}")
+            }
 
 
-        //    val parametes = call.receiveParameters()
+            //    val parametes = call.receiveParameters()
             //println("stupid line to have something to jump to in debug.$id")
-        /*    val id = parametes.getOrFail("id").toInt()
-            val desc = parametes.getOrFail("description")
-            val sample = dao.addNewSample(id, desc)
-            call.respondRedirect("/samples/${sample?.sample_id}")*/
+            /*    val id = parametes.getOrFail("id").toInt()
+                val desc = parametes.getOrFail("description")
+                val sample = dao.addNewSample(id, desc)
+                call.respondRedirect("/samples/${sample?.sample_id}")*/
         }
 
         get {
