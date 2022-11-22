@@ -34,7 +34,7 @@ fun Route.sampleRouter() {
 
             try {
                 val sample = call.receive<Sample>()
-                val createdSample = dao.addNewSample(sample.sample_id.toInt(), sample.description, sample.pos)
+                val createdSample = dao.addNewSample(sample.sample_id.toInt(), sample.description, sample.geometry)
                 call.respond(HttpStatusCode.Created)
 
             } catch (ex: BadRequestException) {

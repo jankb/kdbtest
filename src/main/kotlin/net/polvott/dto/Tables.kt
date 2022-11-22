@@ -12,8 +12,20 @@ object Samples: Table()
 }
 
 @Serializable
+data class MTGeometry(
+    val type: String,
+    val coordinates: Array<Double>
+)
+
+@Serializable
+data class Feature (
+    val type:  String,
+    val geometry : MTGeometry
+        )
+
+@Serializable
 data class Sample(
     val sample_id: Int,
     val description: String,
-    val pos: String
+    val geometry: MTGeometry?
 )

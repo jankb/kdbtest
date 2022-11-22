@@ -6,6 +6,8 @@ import net.polvott.dto.Sample
 import org.jetbrains.exposed.sql.Database
 import io.ktor.server.config.ApplicationConfig
 import java.sql.DriverManager
+import net.polvott.dto.Feature
+import net.polvott.dto.MTGeometry
 import org.flywaydb.core.Flyway
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 
@@ -31,6 +33,6 @@ object DatabaseFactory
 interface DAOFacade {
     suspend fun allSamples(): List<Sample>
     suspend fun sample(id: Int): Sample?
-    suspend fun addNewSample(id: Int, description: String, pos : String): Sample?
+    suspend fun addNewSample(id: Int, description: String, pos : MTGeometry?): Sample?
 }
 
