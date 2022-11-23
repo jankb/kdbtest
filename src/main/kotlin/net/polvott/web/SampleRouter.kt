@@ -50,12 +50,6 @@ fun Route.sampleRouter() {
             }
 
 
-            //    val parametes = call.receiveParameters()
-            //println("stupid line to have something to jump to in debug.$id")
-            /*    val id = parametes.getOrFail("id").toInt()
-                val desc = parametes.getOrFail("description")
-                val sample = dao.addNewSample(id, desc)
-                call.respondRedirect("/samples/${sample?.sample_id}")*/
         }
 
         get {
