@@ -12,10 +12,10 @@ object Samples: Table()
 {
     val sample_id = integer("sample_id")
     val description = varchar("description", 255)
-    val pos = point("pos").nullable()
+    val pos = point("point").nullable()
 }
 
-val SRID: Int = 3857
+val SRID: Int = 4326
 
 fun Table.point(name: String, srid: Int =SRID): Column<Point>
   =registerColumn(name, PointColumnType())

@@ -16,18 +16,12 @@ class DAOFacadeImpl : DAOFacade {
     private fun resultRowFromSample(row: ResultRow): Sample {
         val geometry = row[Samples.pos]
 
-        println("landing point for debugger $geometry")
-
-
-
         if (geometry != null && geometry is Point) {
-
                 return Sample(
                     sample_id = row[Samples.sample_id],
                     description = row[Samples.description],
                     geometry = MTGeometry("Point", arrayOf(geometry.x, geometry.y))
                 )
-
         }
         else
             return Sample(
@@ -35,7 +29,6 @@ class DAOFacadeImpl : DAOFacade {
                 description = row[Samples.description],
                 null
             )
-
     }
 
     override suspend fun allSamples(): List<Sample> = dbQuery {
@@ -45,7 +38,6 @@ class DAOFacadeImpl : DAOFacade {
     override suspend fun addNewSample(id: Int, description: String, pos : MTGeometry?): Sample? = dbQuery{
 
         if (pos != null) {
-
             val result = Samples.insert {
                 it[Samples.sample_id] = id
                 it[Samples.description] = description
@@ -60,7 +52,6 @@ class DAOFacadeImpl : DAOFacade {
                 it[Samples.sample_id] = id
                 it[Samples.description] = description
                 it[Samples.pos] = null
-
             }
             result.resultedValues?.singleOrNull()?.let(::resultRowFromSample)
         }
