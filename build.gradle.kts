@@ -44,9 +44,6 @@ dependencies {
     implementation("net.postgis:postgis-geometry:2021.1.0")
     implementation("net.postgis:postgis-jdbc:2021.1.0")
 
-    // https://mvnrepository.com/artifact/net.postgis/postgis-geometry
-    implementation("net.postgis:postgis-geometry:2021.1.0")
-
 
     implementation("org.flywaydb:flyway-core:$flyway_version")
 
