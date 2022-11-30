@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://mattilsynet.no/provetaking/requisition.schema.json",
+    "title": "Requisition",
+    "description": "A requisition to be handeled by a laboratory.",
+    "type": "object",
+    "properties": {
+      "sampleId": {
+        "description": "The unique identifier for a sample. See SSDv2 D.01",
+        "type": "string"
+      }
+    },
+      "sampleTakenDateTime": {
+        "description": "Date, UTC, when the sample was taken. RFC3339, YYYY-MM-DD",
+        "type": "string"
+      }
+    },
+    "matrix": {
+      "description" : "
+}
+    "required": ["sampleId", "sampleTakenDateTime"]
+}
