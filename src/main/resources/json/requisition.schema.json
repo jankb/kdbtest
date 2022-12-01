@@ -7,24 +7,46 @@
     "properties": {
       "sampleId": {
         "description": "The unique identifier for a sample. See SSDv2 D.01",
-        "type": "string"
+        "type": "string",
+        "maxLength": "255"
       },
-      "sampleTakenDateTime": {
+      "sampleTakenDate": {
         "description": "Date, UTC, when the sample was taken. RFC3339, YYYY-MM-DD",
-        "type": "string"
+        "type": "string",
+        "format": "date",
+        "maxLength": "10"
+
       },
       "matrix": {
         "description" : "What it is sample off. E.g kidney, muscle etc",
-        "type": "string"
+        "type": "string",
+        "maxLength": "255"
+
       },
       "analyse": {
         "description" : "What it should be analysed for.",
-        "type": "string"
+        "type": "string",
+        "maxLength": "255"
+
       },
       "sex": {
         "description" : "Male or female.",
-        "type": "string"
+        "type": "string",
+        "enum": ["male", "female"],
+        "maxLength": "6"
+
       },
-      "required": ["sampleId", "sampleTakenDateTime","matrix"]
+      "live": {
+        "description" : "Was the animal alive at the time of sampling?",
+        "type": "string",
+        "enum": ["yes", "no"],
+        "maxLength": "3"
+      },
+      "age": {
+        "description" : "The age of the animal (in years) at the time of sampling.",
+        "$comment": "Should weeks, months, days also be possible resolutions in age?",
+        "type": "integer"
+      },
+      "required": ["sampleId", "sampleTakenDateTime","matrix", "analyse", "sex","live", "age"]
     }
 }
