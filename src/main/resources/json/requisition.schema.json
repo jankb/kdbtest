@@ -8,15 +8,23 @@
       "sampleId": {
         "description": "The unique identifier for a sample. See SSDv2 D.01",
         "type": "string"
-      }
-    },
+      },
       "sampleTakenDateTime": {
         "description": "Date, UTC, when the sample was taken. RFC3339, YYYY-MM-DD",
         "type": "string"
-      }
-    },
-    "matrix": {
-      "description" : "
-}
-    "required": ["sampleId", "sampleTakenDateTime"]
+      },
+      "matrix": {
+        "description" : "What it is sample off. E.g kidney, muscle etc",
+        "type": "string"
+      },
+      "analyse": {
+        "description" : "What it should be analysed for.",
+        "type": "string"
+      },
+      "sex": {
+        "description" : "Male or female.",
+        "type": "string"
+      },
+      "required": ["sampleId", "sampleTakenDateTime","matrix"]
+    }
 }
