@@ -10,43 +10,81 @@
         "type": "string",
         "maxLength": "255"
       },
+
       "sampleTakenDate": {
         "description": "Date, UTC, when the sample was taken. RFC3339, YYYY-MM-DD",
         "type": "string",
         "format": "date",
         "maxLength": "10"
-
       },
+
       "matrix": {
         "description" : "What it is sample off. E.g kidney, muscle etc",
         "type": "string",
         "maxLength": "255"
-
       },
+
       "analyse": {
         "description" : "What it should be analysed for.",
         "type": "string",
         "maxLength": "255"
-
       },
+
       "sex": {
         "description" : "Male or female.",
         "type": "string",
         "enum": ["male", "female"],
         "maxLength": "6"
-
       },
+
       "live": {
         "description" : "Was the animal alive at the time of sampling?",
         "type": "string",
         "enum": ["yes", "no"],
         "maxLength": "3"
       },
+
       "age": {
         "description" : "The age of the animal (in years) at the time of sampling.",
         "$comment": "Should weeks, months, days also be possible resolutions in age?",
         "type": "integer"
       },
-      "required": ["sampleId", "sampleTakenDateTime","matrix", "analyse", "sex","live", "age"]
+
+      "pregnant": {
+        "description" : "Was the animal pregnant at the time of sampling?",
+        "type": "string",
+        "enum": ["yes", "no"],
+        "maxLength": "3"
+      },
+
+      "parturition": {
+        "description" : "Has the animal given birth within the last 4 weeks?",
+        "type": "string",
+        "enum": ["yes", "no"],
+        "maxLength": "3"
+      },
+
+      "organic": {
+        "description" : "Organic production?",
+        "type": "string",
+        "enum": ["yes", "no"],
+        "maxLength": "3"
+      },
+
+      "medicalTreatment": {
+        "description" : "Documentation of medical treatment within the last 4 weeks.",
+        "type": "string",
+        "maxLength": "2048"
+      },
+
+      "medicalTreatmentDate": {
+        "description" : "Date of medical treatment.",
+        "type": "string",
+        "format": "date",
+        "maxLength": "10"
+      },
+
+      "required": ["sampleId", "sampleTakenDate","matrix", "analyse",
+ "sex","live", "age", "pregnant", "parturition", "organic", "medicalTreatment"]
     }
 }
