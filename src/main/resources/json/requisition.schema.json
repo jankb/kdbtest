@@ -21,7 +21,7 @@
       "type": "string",
       "maxLength": 255
     },
-    "analyse": {
+    "analytes": {
       "description": "What it should be analysed for.",
       "type": "string",
       "maxLength": 255
@@ -47,7 +47,9 @@
     "age": {
       "description": "The age of the animal (in years) at the time of sampling.",
       "$comment": "Should weeks, months, days also be possible resolutions in age?",
-      "type": "integer"
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 366
     },
     "pregnant": {
       "description": "Was the animal pregnant at the time of sampling?",
@@ -92,7 +94,7 @@
     "sampleId",
     "sampleTakenDate",
     "matrix",
-    "analyse",
+    "analytes",
     "sex",
     "live",
     "age",
